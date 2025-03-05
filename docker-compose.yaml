@@ -2,14 +2,14 @@ services:
 
   broker-a:
     image: confluentinc/cp-server:${CP_TAG}
-    hostname: broker
-    container_name: broker
+    hostname: broker-a
+    container_name: broker-a
     ports:
       - "9091:9091"
     environment:
       KAFKA_NODE_ID: 1
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT'
-      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://broker:29091,PLAINTEXT_HOST://localhost:9091'
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://broker-a:29091,PLAINTEXT_HOST://localhost:9091'
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_DEFAULT_REPLICATION_FACTOR: 1
       KAFKA_DEFAULT_MIN_ISR: 1
@@ -20,24 +20,24 @@ services:
       KAFKA_CONFLUENT_BALANCER_ENABLE: 'false'
       KAFKA_JMX_PORT: 9101
       KAFKA_JMX_HOSTNAME: localhost
-      KAFKA_PROCESS_ROLES: 'broker,controller'
-      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@broker:29090'
-      KAFKA_LISTENERS: 'PLAINTEXT://broker:29091,CONTROLLER://broker:29090,PLAINTEXT_HOST://0.0.0.0:9091'
+      KAFKA_PROCESS_ROLES: 'broker-a,controller'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@broker-a:29090'
+      KAFKA_LISTENERS: 'PLAINTEXT://broker-a:29091,CONTROLLER://broker-a:29090,PLAINTEXT_HOST://0.0.0.0:9091'
       KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
       KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
       # KAFKA_LOG_DIRS: '/tmp/kraft-combined-logs'
-      CLUSTER_ID: 'ZWe3nnZwTrKSM0aM2doAxQ'
+      CLUSTER_ID: 'AWe3nnZwTrKSM0aM2doAxQ'
 
   broker-b:
     image: confluentinc/cp-server:${CP_TAG}
-    hostname: broker
-    container_name: broker
+    hostname: broker-b
+    container_name: broker-b
     ports:
       - "9092:9092"
     environment:
       KAFKA_NODE_ID: 1
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT'
-      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://broker:29092,PLAINTEXT_HOST://localhost:9092'
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://broker-b:29092,PLAINTEXT_HOST://localhost:9092'
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_DEFAULT_REPLICATION_FACTOR: 1
       KAFKA_DEFAULT_MIN_ISR: 1
@@ -48,9 +48,9 @@ services:
       KAFKA_CONFLUENT_BALANCER_ENABLE: 'false'
       KAFKA_JMX_PORT: 9102
       KAFKA_JMX_HOSTNAME: localhost
-      KAFKA_PROCESS_ROLES: 'broker,controller'
-      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@broker:29093'
-      KAFKA_LISTENERS: 'PLAINTEXT://broker:29092,CONTROLLER://broker:29093,PLAINTEXT_HOST://0.0.0.0:9092'
+      KAFKA_PROCESS_ROLES: 'broker-b,controller'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@broker-b:29093'
+      KAFKA_LISTENERS: 'PLAINTEXT://broker-b:29092,CONTROLLER://broker-b:29093,PLAINTEXT_HOST://0.0.0.0:9092'
       KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
       KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
       # KAFKA_LOG_DIRS: '/tmp/kraft-combined-logs'
